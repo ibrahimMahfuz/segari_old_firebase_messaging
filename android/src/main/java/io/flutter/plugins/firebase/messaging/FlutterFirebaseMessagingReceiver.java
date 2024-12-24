@@ -68,7 +68,7 @@ public class FlutterFirebaseMessagingReceiver extends BroadcastReceiver {
       // Access specific data from the map
       final String event = data.get("event");
       if (event == null) return;
-      final boolean isProd = "production".equals(data.get("topicPrefix"));
+      final boolean isAlpha = "alpha".equals(data.get("topicPrefix"));
       if (event.hashCode() != "SDD_ORDER_TO_PICK".hashCode()) return;
       final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
       if (audioManager == null) return;
@@ -76,9 +76,9 @@ public class FlutterFirebaseMessagingReceiver extends BroadcastReceiver {
       if (ringerMode == AudioManager.RINGER_MODE_NORMAL) return;
 
       // Replace "com.example.othermodule" with the actual package name of the other module
-      final String externalPackageName = isProd
-              ? "id.segari.whflutter"
-              : "id.segari.whflutter.local";
+      final String externalPackageName = isAlpha
+              ? "id.segari.whflutter.local"
+              : "id.segari.whflutter.ayam";
 
       // Get the context of the external package
       final Context externalContext = context.createPackageContext(externalPackageName, Context.CONTEXT_IGNORE_SECURITY);
