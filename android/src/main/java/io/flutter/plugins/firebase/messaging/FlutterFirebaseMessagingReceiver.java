@@ -76,7 +76,6 @@ public class FlutterFirebaseMessagingReceiver extends BroadcastReceiver {
       if (ringerMode == AudioManager.RINGER_MODE_NORMAL) return;
       final int volumeLevel = 7;
 
-// Ensure the volume level is within the valid range
       final int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
       final int safeVolume = Math.min(volumeLevel, maxVolume);
 
