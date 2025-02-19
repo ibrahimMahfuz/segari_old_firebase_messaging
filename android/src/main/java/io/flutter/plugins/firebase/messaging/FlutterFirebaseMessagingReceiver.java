@@ -74,7 +74,13 @@ public class FlutterFirebaseMessagingReceiver extends BroadcastReceiver {
       if (audioManager == null) return;
       final int ringerMode = audioManager.getRingerMode();
       if (ringerMode == AudioManager.RINGER_MODE_NORMAL) return;
-      audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 7, 0);
+      final int volumeLevel = 7;
+
+// Ensure the volume level is within the valid range
+      final int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+      final int safeVolume = Math.min(volumeLevel, maxVolume);
+
+      audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, safeVolume, 0);
 
       // Replace "com.example.othermodule" with the actual package name of the other module
       final String externalPackageName = isProd
